@@ -1,11 +1,11 @@
 __author__ = 'Chad_Ramey'
 
-
 def f(x):
     import math
     return 10*math.e**(math.log(0.5)/5.27 * x)
 
-def radiationExposure(start, stop, step):
+
+def radiation_exposure(start, stop, step):
     '''
     Computes and returns the amount of radiation exposed
     to between the start and stop times. Calls the
@@ -20,6 +20,7 @@ def radiationExposure(start, stop, step):
     returns: float, the amount of radiation exposed to
       between start and stop times.
     '''
+
     total_area = 0
 
     for i in range(int((stop - start) / step)):
@@ -27,8 +28,13 @@ def radiationExposure(start, stop, step):
 
     return total_area
 
-print "Radiation Exposure Results:"
-print radiationExposure(0, 5, 1)
-print radiationExposure(5, 11, 1)
-print radiationExposure(0, 11, 1)
-print radiationExposure(40, 100, 1.5)
+
+def main():
+    print "Radiation Exposure Results:"
+    print radiation_exposure(0, 5, 1)
+    print radiation_exposure(5, 11, 1)
+    print radiation_exposure(0, 11, 1)
+    print radiation_exposure(40, 100, 1.5)
+
+if __name__ == "__main__":
+    main()
