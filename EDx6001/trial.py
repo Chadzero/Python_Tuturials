@@ -1,15 +1,14 @@
-def FancyDivide(numbers, index):
-    try:
-        denom = numbers[index]
-        for i in range(len(numbers)):
-            numbers[i] /= denom
-    except IndexError, e:
-        FancyDivide(numbers, len(numbers) - 1)
-    except ZeroDivisionError, e:
-        print "-2"
-    else:
-        print "1"
-    finally:
-        print "0"
+def calculateHandlen(hand):
+    """
+    Returns the length (number of letters) in the current hand.
 
-FancyDivide([0, 2, 4], 0)
+    hand: dictionary (string-> int)
+    returns: integer
+    """
+    hand_count = 0
+    for key in hand:
+        hand_count += hand[key]
+    return hand_count
+
+
+print calculateHandlen({'a':1,'b':4,'c':1})
