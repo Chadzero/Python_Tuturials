@@ -166,8 +166,6 @@ def updateHand(hand, word):
             new_hand.pop(letter, None)
     return new_hand
 
-
-
 #
 # Problem #3: Test word validity
 #
@@ -185,10 +183,8 @@ def isValidWord(word, hand, wordList):
     # TO DO ... <-- Remove this comment when you code this function
     word_Valid = True
     if word in wordList:
-        word_dict = getFrequencyDict(word)
-        for letter in word_dict:
-            if word_dict[letter] > hand.get(letter, 0):
-                word_Valid = False
+        if not wordInHand(word, hand):
+            word_Valid = False
     else:
         word_Valid = False
     return word_Valid
@@ -196,6 +192,14 @@ def isValidWord(word, hand, wordList):
 #
 # Problem #4: Playing a hand
 #
+
+def wordInHand(word, hand):
+    word_present = True
+    word_dict = getFrequencyDict(word)
+    for letter in word_dict:
+        if word_dict[letter] > hand.get(letter, 0):
+            word_present = False
+    return word_present
 
 def calculateHandlen(hand):
     """ 
@@ -233,9 +237,9 @@ def playHand(hand, wordList, n):
     # Keep track of the total score
     total_score = 0
     # As long as there are still letters left in the hand:
-    while calculateHandlen(hand) > 1:
+    while calculateHandlen(hand) > 0:
         # Display the hand
-        print "Current Hand is: "
+        print "Current Hand is: ",
         displayHand(hand)
         # Ask user for input
         user_word = raw_input("Enter your word or '.' to exit:  ")
@@ -278,8 +282,27 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
+    hand = None
 
+    while 1:
+        user_option = raw_input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
+        user_option = user_option.lower()
 
+        if user_option == 'n':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+
+        elif user_option =='r':
+            if hand:
+                playHand(hand, wordList, HAND_SIZE)
+            else:
+                print "You have not played a hand yet. Please play a new hand first!"
+
+        elif user_option == 'e':
+            break
+
+        else:
+            print "You have entered and invalid option"
 #
 # Build data structures used for entire session and play game
 #
