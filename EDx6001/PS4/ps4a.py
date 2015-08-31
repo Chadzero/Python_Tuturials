@@ -268,7 +268,8 @@ def playHand(hand, wordList, n):
 
 #
 # Problem #5: Playing a game
-# 
+#
+
 
 def playGame(wordList):
     """
